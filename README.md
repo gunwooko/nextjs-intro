@@ -1,5 +1,15 @@
 # Nextjs Intro
 
+## Setup
+
+```
+npx create-next-app@latest --typescript
+
+or
+
+yarn create next-app --typescript
+```
+
 ## Pages
 
 페이지 폴더에는 말 그래도 페이지 컴포넌트가 작성된다. 몇가지 특징-규칙이 있는데:
