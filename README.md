@@ -65,3 +65,50 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 ```
+
+## Layouts patterns
+
+`_app.js` 파일에는 global로 해결해야할 일들이 많다. 그렇기에 `_app.js`에 리액트 컴포넌트를 길게 사용하기 보다 나누어서 관리해주는 것이 유지 보수에 좋다.
+
+```ts
+// components/layout.js
+import Navbar from "./navbar";
+import Footer from "./footer";
+
+// 그리고서 Layout으로 감싸 준다.
+export default function Layout({ children }) {
+  return (
+    <>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+}
+```
+
+## next.config.js
+
+[`next.config.js`](https://nextjs.org/docs/api-reference/next.config.js/introduction)는 NextJs에서 사용하는 Node.js 모듈로서 브라우저 빌드에 포함되지 않는, NextJs 서버 빌드에 포함되는 설정이다.
+
+- Environment Variables
+- Base Path
+- Rewrites
+- Redirects
+- Custom Headers
+  등 다양한 사용가능한 옵션들이 많이 있다.
+
+## Automatic Static Optimization: getServerSideProps & getInitialProps in the page.
+
+How to use [`getServerSideProps`](https://nextjs.org/docs/basic-features/pages#server-side-rendering)
+이 함수는 서버에서 동작이 되고, NextJs가 이 함수가 있는 페이지를 읽게되면, 우선적으로 백엔드에서 실행한 후 `Custom App`의 `pageProps`으로 데이터를 전달하게 된다.
+
+## Dynamic Routes
+
+NextJs에서의 라우팅은 매우 간편하게 되어 있다.
+만일 `pages` 폴더에 만들어주는 파일명이 그대로 따르게 되어 있다. `pages/post/all.js` or `pages/post/index.js` or `pages/post/[id].js`. 이렇게 정의해 줄 수 있다.
+
+## useRouter
+
+`useRouter`에 [`push`](https://nextjs.org/docs/api-reference/next/router#routerpush) 메소드를 통해 Link 처럼 리다이렉트를 할 수 있다.
+또한 url을 통해 데이터를 전달 할 수 있고, 그리고 `as` 옵션을 통해서 해당 데이터를 유저로부터 숨길 수 있다. (masking)
